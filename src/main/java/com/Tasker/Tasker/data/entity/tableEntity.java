@@ -1,9 +1,10 @@
-package com.Tasker.Tasker.entity;
+package com.Tasker.Tasker.data.entity;
 
 import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Objects;
+
 
 @Entity
 @Table(name = "table")

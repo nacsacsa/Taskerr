@@ -1,4 +1,4 @@
-package com.Tasker.Tasker.entity;
+package com.Tasker.Tasker.data.entity;
 
 
 import org.springframework.data.annotation.Id;
