@@ -23,4 +23,16 @@ public class TaskServiceImpl implements TaskService {
     	taskEntity entity = repo.findById(id);
         return mapper.map(entity, TaskDto.class);
     }
+
+	@Override
+	public TaskDto findByTable_id(String id) {
+		taskEntity entity = repo.findByTable_id(id);
+        return mapper.map(entity, TaskDto.class);
+	}
+
+	@Override
+	public TaskDto findBytask_done() {
+		taskEntity entity = repo.findBytask_done(true);
+        return mapper.map(entity, TaskDto.class);
+	}
 }

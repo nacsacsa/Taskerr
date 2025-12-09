@@ -7,5 +7,8 @@ import com.Tasker.Tasker.data.entity.taskEntity;
 
 @Repository
 public interface taskRepository extends JpaRepository<taskEntity, Long> {
-	taskEntity findById(String email);
+	taskEntity findById(String id);
+	taskEntity findByTable_id(String id);
+	taskEntity findBytask_done(boolean x);
+	
 }

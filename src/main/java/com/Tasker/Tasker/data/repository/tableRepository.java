@@ -7,5 +7,6 @@ import com.Tasker.Tasker.data.entity.tableEntity;
 
 @Repository
 public interface tableRepository extends JpaRepository<tableEntity, Long> {
-	tableEntity findById(String email);
+	tableEntity findById(String id);
+	tableEntity findByUser_id(String id);
 }

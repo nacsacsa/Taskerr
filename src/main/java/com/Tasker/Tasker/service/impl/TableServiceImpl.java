@@ -23,4 +23,10 @@ public class TableServiceImpl implements TableService {
     	tableEntity entity = repo.findById(id);
         return mapper.map(entity, TableDto.class);
     }
+
+	@Override
+	public TableDto findByUser_id(String id) {
+		tableEntity entity = repo.findByUser_id(id);
+        return mapper.map(entity, TableDto.class);
+	}
 }
