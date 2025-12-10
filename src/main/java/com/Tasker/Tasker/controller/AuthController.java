@@ -20,13 +20,13 @@ public class AuthController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/regisztracio")
-    public String regisztracio(@RequestBody RegistrationDto dto){
+    @PostMapping("/registration")
+    public String registration(@RequestBody RegistrationDto dto){
         return service.registration(dto);
     }
 
-    @PostMapping("/bejelentkezes")
-    public String bejelentkezes(@RequestBody LoginDto dto){
+    @PostMapping("/login")
+    public String login(@RequestBody LoginDto dto){
         return service.login(dto);
     }
 }

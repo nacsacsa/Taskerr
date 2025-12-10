@@ -30,22 +30,22 @@ public class TableController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/create")
-    @PreAuthorize("hasRole('FELHASZNALO')")
+    @PostMapping("/table/create")
+    @PreAuthorize("hasRole('USER')")
     public TableDto createTable(@RequestBody TableDto tableDto, Authentication authentication) {
 
         String email = authentication.getName();
         UsersDto user = usersService.findByEmail(email);
 
         if (user == null) {
-            throw new RuntimeException("Felhasználó nem található.");
+            throw new RuntimeException("Cannot find the user!");
         }
 
         return tableService.save(tableDto, user);
     }
 
-    @DeleteMapping("/delete")
-    @PreAuthorize("hasRole('FELHASZNALO')")
+    @DeleteMapping("/table/delete")
+    @PreAuthorize("hasRole('USER')")
     public void deleteTable(@RequestParam String id, Authentication authentication) {
 
         TableDto existing = tableService.findById(id);
@@ -53,18 +53,18 @@ public class TableController {
         UsersDto user = usersService.findByEmail(email);
 
         if (!existing.getUser().getId().equals(user.getId())) {
-            throw new RuntimeException("Más felhasználó tábláját nem lehet törölni!");
+            throw new RuntimeException("Cannot delete other users table!");
         }
 
         tableService.delete(id);
     }
 
-    @PutMapping("/update")
-    @PreAuthorize("hasRole('FELHASZNALO')")
+    @PutMapping("/table/update")
+    @PreAuthorize("hasRole('USER')")
     public TableDto updateTable(@RequestBody TableDto tableDto, Authentication authentication) {
 
         if (tableDto.getId() == null) {
-            throw new RuntimeException("A frissítéshez szükséges a tábla azonosítója.");
+            throw new RuntimeException("Table Id needed");
         }
 
         String email = authentication.getName();
@@ -73,15 +73,15 @@ public class TableController {
         TableDto existing = tableService.findById(tableDto.getId().toString());
 
         if (!existing.getUser().getId().equals(user.getId())) {
-            throw new RuntimeException("Más felhasználó tábláját nem lehet módosítani!");
+            throw new RuntimeException("Cannot change other users table!");
         }
 
         return tableService.save(tableDto, user);
     }
 
 
-    @GetMapping("/get/user")
-    @PreAuthorize("hasRole('FELHASZNALO')")
+    @GetMapping("/table/user")
+    @PreAuthorize("hasRole('USER')")
     public List<TableDto> findByUserId(@RequestParam Authentication authentication) {
     	String email = authentication.getName();
     	UsersDto user = usersService.findByEmail(email);

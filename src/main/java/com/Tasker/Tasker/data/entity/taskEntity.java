@@ -43,11 +43,11 @@ public class taskEntity {
         this.id = id;
     }
 
-    public tableEntity getTableId() {
+    public tableEntity getTable() {
         return table;
     }
 
-    public void setTableId(tableEntity table) {
+    public void setTable(tableEntity table) {
         this.table = table;
     }
 
