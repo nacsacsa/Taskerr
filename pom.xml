@@ -12,7 +12,7 @@
 	<artifactId>Tasker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Tasker</name>
-	<description>An easy web application for managing to do tasks</description>
+	<description>Task manager applicaton backend</description>
 	<url/>
 	<licenses>
 		<license/>
