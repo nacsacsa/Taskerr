@@ -10,6 +10,7 @@ export interface User {
 
 export interface Task {
   id?: number;
+  table?: Table;
   name?: string;
   description?: string;
   done?: boolean;
@@ -26,7 +27,7 @@ export interface Table {
 @Injectable({
   providedIn: 'root',
 })
-export class tableService {
+export class TableService {
   private baseUrl = 'http://localhost:8080/api/table'
   constructor(private http: HttpClient) {}
 
