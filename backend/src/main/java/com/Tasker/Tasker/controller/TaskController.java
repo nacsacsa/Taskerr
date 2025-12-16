@@ -37,19 +37,26 @@ public class TaskController {
 
     @PostMapping("/task/create")
     @PreAuthorize("hasRole('USER')")
-    public TaskDto createTask(@RequestBody TaskDto taskDto, TableDto table, Authentication authentication) {
+    public TaskDto createTask(@RequestBody TaskDto taskDto, Authentication authentication) {
     	String email = authentication.getName();
         UsersDto user = usersService.findByEmail(email);
+
+        if (taskDto.getTable() == null || taskDto.getTable().getId() == null) {
+            throw new RuntimeException("Table is required!");
+        }
+
+        TableDto table = tableService.findById(taskDto.getTable().getId().toString());
 
         if (!table.getUser().getId().equals(user.getId())) {
             throw new RuntimeException("Cannot edit others table!");
         }
+
         return taskService.save(taskDto, table);
     }
 
     @DeleteMapping("/task/delete")
     @PreAuthorize("hasRole('USER')")
-    public void deleteTable(@RequestParam String id, Authentication authentication) {
+    public void deleteTask(@RequestParam String id, Authentication authentication) {
 
         TaskDto existing = taskService.findById(id);
         String email = authentication.getName();
@@ -64,7 +71,7 @@ public class TaskController {
 
     @PutMapping("/task/update")
     @PreAuthorize("hasRole('USER')")
-    public TaskDto updateTable(@RequestBody TaskDto taskDto, Authentication authentication, String tableId) {
+    public TaskDto updateTask(@RequestBody TaskDto taskDto, Authentication authentication, String tableId) {
 
         if (taskDto.getId() == null) {
             throw new RuntimeException("Task Id needed!");
@@ -86,7 +93,7 @@ public class TaskController {
 
     @GetMapping("/task/table")
     @PreAuthorize("hasRole('USER')")
-    public List<TaskDto> findByUserId(@RequestParam Authentication authentication, String Id) {
+    public List<TaskDto> findByTableId(@RequestParam String Id, Authentication authentication) {
     	String email = authentication.getName();
     	UsersDto user = usersService.findByEmail(email);
     	TableDto table = tableService.findById(Id);
