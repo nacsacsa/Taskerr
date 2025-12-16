@@ -82,7 +82,7 @@ public class TableController {
 
     @GetMapping("/table/user")
     @PreAuthorize("hasRole('USER')")
-    public List<TableDto> findByUserId(@RequestParam Authentication authentication) {
+    public List<TableDto> findByUserId(Authentication authentication) {
     	String email = authentication.getName();
     	UsersDto user = usersService.findByEmail(email);
     	
