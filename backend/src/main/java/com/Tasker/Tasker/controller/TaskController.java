@@ -71,15 +71,20 @@ public class TaskController {
 
     @PutMapping("/task/update")
     @PreAuthorize("hasRole('USER')")
-    public TaskDto updateTask(@RequestBody TaskDto taskDto, Authentication authentication, String tableId) {
+    public TaskDto updateTask(@RequestBody TaskDto taskDto, Authentication authentication) {
 
         if (taskDto.getId() == null) {
             throw new RuntimeException("Task Id needed!");
         }
 
+        if (taskDto.getTable() == null || taskDto.getTable().getId() == null) {
+            throw new RuntimeException("Table is required!");
+        }
+
         String email = authentication.getName();
         UsersDto user = usersService.findByEmail(email);
-        TableDto table = tableService.findById(tableId);
+
+        TableDto table = tableService.findById(taskDto.getTable().getId().toString());
 
         TaskDto existing = taskService.findById(taskDto.getId().toString());
 
