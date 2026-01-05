@@ -35,13 +35,13 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public List<TaskDto> findAllByTableId(String id) {
-		List<taskEntity> entity = repo.findAllByTable_id(id);
+		List<taskEntity> entity = repo.findAllByTable(id);
 		return mapper.map(entity, new TypeToken<List<TaskDto>>(){}.getType());
 	}
 
 	@Override
 	public List<TaskDto> findAllBytaskDone() {
-		List<taskEntity> entity = repo.findAllBytask_done(true);
+		List<taskEntity> entity = repo.findAllByTaskDone(true);
 		return mapper.map(entity, new TypeToken<List<TaskDto>>(){}.getType());
 	}
 

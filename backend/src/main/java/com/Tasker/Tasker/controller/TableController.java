@@ -16,7 +16,7 @@ import org.springframework.security.core.Authentication;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/table")
 public class TableController {
 
     @Autowired
@@ -30,7 +30,7 @@ public class TableController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/table/create")
+    @PostMapping("/create")
     @PreAuthorize("hasRole('USER')")
     public TableDto createTable(@RequestBody TableDto tableDto, Authentication authentication) {
 
@@ -44,7 +44,7 @@ public class TableController {
         return tableService.save(tableDto, user);
     }
 
-    @DeleteMapping("/table/delete")
+    @DeleteMapping("/delete")
     @PreAuthorize("hasRole('USER')")
     public void deleteTable(@RequestParam String id, Authentication authentication) {
 
@@ -59,7 +59,7 @@ public class TableController {
         tableService.delete(id);
     }
 
-    @PutMapping("/table/update")
+    @PutMapping("/update")
     @PreAuthorize("hasRole('USER')")
     public TableDto updateTable(@RequestBody TableDto tableDto, Authentication authentication) {
 
@@ -80,7 +80,7 @@ public class TableController {
     }
 
 
-    @GetMapping("/table/user")
+    @GetMapping("/user")
     @PreAuthorize("hasRole('USER')")
     public List<TableDto> findByUserId(Authentication authentication) {
     	String email = authentication.getName();

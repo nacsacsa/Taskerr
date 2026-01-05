@@ -10,7 +10,6 @@ import com.Tasker.Tasker.data.entity.taskEntity;
 @Repository
 public interface taskRepository extends JpaRepository<taskEntity, Long> {
 	taskEntity findById(String id);
-	List<taskEntity> findAllBytask_done(boolean x);
-	List<taskEntity> findAllByTable_id(String id);
-	
+	List<taskEntity> findAllByTaskDone(boolean x);
+	List<taskEntity> findAllByTable(String id);
 }

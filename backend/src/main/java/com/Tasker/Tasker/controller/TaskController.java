@@ -18,7 +18,7 @@ import org.springframework.security.core.Authentication;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/task")
 public class TaskController {
 
     @Autowired
@@ -35,7 +35,7 @@ public class TaskController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/task/create")
+    @PostMapping("/create")
     @PreAuthorize("hasRole('USER')")
     public TaskDto createTask(@RequestBody TaskDto taskDto, Authentication authentication) {
     	String email = authentication.getName();
@@ -54,7 +54,7 @@ public class TaskController {
         return taskService.save(taskDto, table);
     }
 
-    @DeleteMapping("/task/delete")
+    @DeleteMapping("/delete")
     @PreAuthorize("hasRole('USER')")
     public void deleteTask(@RequestParam String id, Authentication authentication) {
 
@@ -69,7 +69,7 @@ public class TaskController {
         taskService.delete(id);
     }
 
-    @PutMapping("/task/update")
+    @PutMapping("/update")
     @PreAuthorize("hasRole('USER')")
     public TaskDto updateTask(@RequestBody TaskDto taskDto, Authentication authentication) {
 
@@ -96,7 +96,7 @@ public class TaskController {
     }
 
 
-    @GetMapping("/task/table")
+    @GetMapping("/table")
     @PreAuthorize("hasRole('USER')")
     public List<TaskDto> findByTableId(@RequestParam String Id, Authentication authentication) {
     	String email = authentication.getName();
